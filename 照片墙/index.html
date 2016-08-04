@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        *{margin:0px; padding:0px;}
+        ul,li{list-style: none;}
+        img{display: block; border:none;}
+        html,body{width: 100%; height: 100%; overflow: hidden;}
+        .box{width: 480px; height: 480px; background: #ffe470; margin:50px auto; padding: 0px 10px 10px 0px;}
+        .box li{width: 150px; height: 150px; margin:10px 0px 0px 10px; background: #000;  cursor:pointer; float: left;}
+        .box li img{width: 100%; height: 100%;}
+
+    </style>
+</head>
+<body>
+<ul id="box" class="box">
+    <li><img src="img/1.png" alt=""></li>
+    <li><img src="img/2.png" alt=""></li>
+    <li><img src="img/3.png" alt=""></li>
+    <li><img src="img/4.png" alt=""></li>
+    <li><img src="img/5.png" alt=""></li>
+    <li><img src="img/6.png" alt=""></li>
+    <li><img src="img/7.png" alt=""></li>
+    <li><img src="img/8.png" alt=""></li>
+    <li><img src="img/9.png" alt=""></li>
+</ul>
+<div style="width:100px; height:100px; background:#f00; position:absolute; top:0px; left:0px;" id="box1"></div>
+<script type="text/javascript" src="js/drag.js"></script>
+<script type="text/javascript">
+   var box1 = document.getElementById('box1');
+    var drag = new Drag(box1);
+    drag.on('mouseMoveFn',aa);
+    drag.on('mouseUp',bb);
+    function aa(){
+        this.innerHTML = 'qwehwqjhe';
+    };
+    function bb(){
+        drag.off('mouseMoveFn',aa);
+        this.innerHTML = '111';
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    div p:nth-child(2){background:#f00;}
+</style>
+<body>
+<div>
+    <div>qweqe</div>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+</div>
+<div>
+    <div>qweqe</div>
+    <div>qweqe</div>
+    <div>qweqe</div>
+    <p>1</p>
+    <p>2</p>
+</div>
+<form>
+    <input type="text" name="name" value="John" id="aa"/>
+    <input type="text" name="password" value="password"/>
+    <input type="text" name="url" value="http://ejohn.org/"/>
+</form>
+</body>
+</html>
+<script type="text/javascript" src="http://linux.lianyingdai.com/Style/Index/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        console.log($('div p:nth-child(2)').text());
+        console.log($('div p:nth-of-type(2)').text());
+    })
+    //'use strict';
+//    let x = 2;
+//    function test (x, y = x) {
+//        console.log(x, y);
+//    }
+//    test(1);
+//箭头函数
+//    var arr = $('input').map(function(){
+//        return $(this).val();
+//    }).get();
+//    var newArr = $.map(arr,function(n){
+//        return n + n;
+//    });
+//   var str = '上海海上';
+//    var arr = str.split('');
+//    for(var i = 4; i>0; i--){
+//        console.log(i);
+//    }
+//    let arr = [1,2,3,4,6];
+//    let arr1 = arr.map(value => {
+//                return value + 1
+//            });
+//    let obj = {
+//        a: function(){
+//            setTimeout(()=>{
+//                console.log(this);
+//            },1000);
+//        }
+//    }
+
+
+
+
+</script>

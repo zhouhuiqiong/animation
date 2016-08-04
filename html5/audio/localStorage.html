@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>本地存储</title>
+</head>
+<body>
+    <div class="box">
+
+    </div>
+    <button>加载数据</button>
+
+</body>
+</html>
+<style>
+    .box{}
+    button{padding:5px 10px; border:1px solid #999; border-radius:10px; background:#fff; cursor:pointer;}
+</style>
+<script type="text/javascript" src="js/cookie.js"></script>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript">
+    var box = document.querySelector('.box'), btn = document.querySelector('button');
+    $(function(){
+        function getData(data){
+            //将数据存储在本地存储
+            if(!flag){
+                var dataStorage = {
+                    time: (new Date()).toString(),
+                    jsonData: data
+                };
+                localStorage.setItem('matchInfo',JSON.stringify(dataStorage));
+            };
+        };
+        var flag = false;
+        var matchInfo = JSON.parse(localStorage.getItem('matchInfo'));
+        if(matchInfo){
+            if(new Date() - new Date(matchInfo.time) <= 6000){
+                getData(matchInfo.jsonData);
+                flag = true;
+                return;
+            };
+            localStorage.removeItem('matchInfo');
+        };
+        $.ajax({
+            url: 'http://sportswebapi.qq.com/html/matchDetail?mid=100000:1468094&_=' + Math.random(),
+            type: 'get',
+            dataType: 'jsonp',
+            jsonpCallback:'getData',
+            success: getData
+        });
+    })
+</script>
