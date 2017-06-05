@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<a href="http://www.zhangxinxu.com/study/201705/js-canvas-image-watermark-synthesis.html">地址</a>
+		<input type="file" id="uploadFile" class="clip" accept="image/*" />
+		<img id="imgCover" src="watermark.png" style="display: none;">
+		<img id="imgPh"  src="pms.png" style="display: none;">
+		<p id="imgUplodX"></p>
+	</body>
+</html>
+<script>
+	var compound = {
+		init: function(){
+			var m = this;
+			m.fileIpt = document.getElementById('uploadFile');
+			m.imgCover = document.getElementById('imgCover');
+			m.imgNews = document.getElementById('imgUplodX');
+			m.imgPh = document.getElementById('imgPh');
+			if(!FileReader){
+				m.ingNews.innerText = '您的浏览器不支持！';
+				return false;
+			};
+			m.getBaseImg();
+		},
+		getBaseImg: function(){
+			var m = this;
+			m.fileIpt.addEventListener('change', function(e){
+				m.reader = new FileReader();
+				var file = event.target.files[0];//文件信息
+			
+				m.reader.readAsDataURL(file);
+				m.reader.onload = function(e){//文件读取成功
+					var base64 = e.target.result;
+					if(base64.length > 1024 * 50){
+						alert('图片大于50K');
+						return false;
+					};
+					//canvas合成图片
+					m.imgTogether(base64, function(url){
+						m.imgNews.innerHTML = '<img src="'+ url +'" width= "'+m.size * 2 +'" height="'+m.size * 2+'"/>'
+					});
+				}
+			});
+		},
+		imgTogether: function(url, callback){
+			var m = this;
+			m.canvas = document.createElement('canvas');
+			m.size = 180;
+			m.canvas.width = m.canvas.height = m.size;
+			m.context = m.canvas.getContext('2d');
+			
+			
+			//上传图片
+			var imgUpload = new Image();
+			imgUpload.src = url;
+			
+			imgUpload.onload = function(){
+				m.context.drawImage(imgUpload, 0, 0, m.size, m.size, 0, 0, m.size, m.size);
+				
+				m.context.drawImage(m.imgPh, 0, 0, m.size, m.size, 0, 0, m.size, m.size);
+				
+				m.context.drawImage(m.imgCover, 0, 0, m.size, m.size, 0, 0, m.size, m.size);
+				
+	
+				callback(m.canvas.toDataURL());
+				
+			};
+			
+		}
+		
+	};
+	compound.init();
+</script>
